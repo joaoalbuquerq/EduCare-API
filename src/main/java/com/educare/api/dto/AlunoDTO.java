@@ -1,4 +1,4 @@
-package com.educare.api;
+package com.educare.api.dto;
 
 import java.time.LocalDate;
 

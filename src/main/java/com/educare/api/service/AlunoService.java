@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.educare.api.AlunoDTO;
+import com.educare.api.dto.AlunoDTO;
 import com.educare.api.entity.Aluno;
 import com.educare.api.repository.AlunoRepository;
 

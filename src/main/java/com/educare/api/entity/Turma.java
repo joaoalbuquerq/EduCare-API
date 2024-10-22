@@ -1,9 +1,8 @@
 package com.educare.api.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.educare.api.dto.AlunoDTO;
+import com.educare.api.dto.TurmaDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,24 +18,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aluno {
+public class Turma {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String email;
-	private LocalDate dataNascimento;
-	//private Turma turma;
 	private String escola;
 	private LocalDateTime dataCriacao;
 	private LocalDateTime dataAtualizacao;
 	
-	public Aluno(AlunoDTO dto) {
+	public Turma(TurmaDTO dto) {
 		this.nome = dto.nome();
-		this.email = dto.email();
-		this.dataNascimento = dto.dataNascimento();
 		this.escola = dto.escola();
-		this.dataAtualizacao = LocalDateTime.now();
 		this.dataCriacao = LocalDateTime.now();
+		this.dataAtualizacao = LocalDateTime.now();
 	}
+
 }
