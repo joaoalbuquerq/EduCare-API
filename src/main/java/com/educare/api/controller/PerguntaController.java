@@ -43,7 +43,7 @@ public class PerguntaController {
 		return ResponseEntity.ok(service.pesquisarPorId(id));
 	}
 	
-	@DeleteMapping("{/id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id){
 		
 		service.deletar(id);
