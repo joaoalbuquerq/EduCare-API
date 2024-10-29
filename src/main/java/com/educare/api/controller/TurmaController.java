@@ -44,7 +44,7 @@ public class TurmaController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id){
 		
-		if(!service.deletar(id)) {
+		if(service.deletar(id)) {
 			return ResponseEntity.noContent().build();
 		}else {
 			return ResponseEntity.internalServerError().build();

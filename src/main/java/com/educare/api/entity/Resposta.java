@@ -14,10 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "respostas")
 public class Resposta {
@@ -36,5 +32,42 @@ public class Resposta {
 		this.dataResposta = LocalDateTime.now();
 		this.dataCriacao= LocalDateTime.now();
 		this.dataAtualizacao= LocalDateTime.now();
+	}
+
+	public Resposta() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getDataResposta() {
+		return dataResposta;
+	}
+
+	public void setDataResposta(LocalDateTime dataResposta) {
+		this.dataResposta = dataResposta;
+	}
+
+	public LocalDateTime getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(LocalDateTime dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public LocalDateTime getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
 	}
 }

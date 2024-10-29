@@ -3,6 +3,7 @@ package com.educare.api.dto;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 
 public record AlunoDTO(
 		@NotBlank
@@ -10,7 +11,7 @@ public record AlunoDTO(
 		
 		String email,
 		
-		@NotBlank
+		@Past
 		LocalDate dataNascimento,
 		
 		@NotBlank

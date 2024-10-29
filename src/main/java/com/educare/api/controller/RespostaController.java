@@ -20,7 +20,7 @@ import com.educare.api.service.RespostaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/resposta")
+@RequestMapping("/respostas")
 public class RespostaController {
 	
 	@Autowired 

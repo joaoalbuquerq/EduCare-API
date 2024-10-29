@@ -19,7 +19,10 @@ public class AlunoService {
 	AlunoRepository repository;
 
 	public Aluno cadastrar(@Valid AlunoDTO dto) {
-		return repository.save(new Aluno(dto));
+		var aluno = new Aluno(dto);
+		repository.save(aluno);
+		
+		return aluno;
 	}
 
 	public List<Aluno> listar() {

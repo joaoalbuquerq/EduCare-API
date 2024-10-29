@@ -21,7 +21,7 @@ import com.educare.api.service.PerguntaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/pergunta")
+@RequestMapping("/perguntas")
 public class PerguntaController {
 
 	@Autowired

@@ -15,10 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "turmas")
 public class Turma {
 	
@@ -35,6 +31,54 @@ public class Turma {
 		this.escola = dto.escola();
 		this.dataCriacao = LocalDateTime.now();
 		this.dataAtualizacao = LocalDateTime.now();
+	}
+	
+	
+
+	public Turma() {
+		super();
+	}
+
+
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEscola() {
+		return escola;
+	}
+
+	public void setEscola(String escola) {
+		this.escola = escola;
+	}
+
+	public LocalDateTime getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(LocalDateTime dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public LocalDateTime getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
 	}
 
 }
