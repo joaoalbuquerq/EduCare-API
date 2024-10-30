@@ -2,15 +2,12 @@ package com.educare.api.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.educare.api.dto.AlunoDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +23,14 @@ public class Aluno {
 	private String nome;
 	private String email;
 	private LocalDate dataNascimento;
-	//private Turma turma;
+
+	@OneToMany(mappedBy = "aluno")
+	private List<Resposta> respostas; // Relacionamento com respostas
+
+	@ManyToOne // Relacionamento muitos-para-um com Turma
+	@JoinColumn(name = "turma_id") // Nome da coluna na tabela alunos
+	private Turma turma; // Referência à turma
+
 	private String escola;
 	private LocalDateTime dataCriacao;
 	private LocalDateTime dataAtualizacao;
@@ -103,6 +107,20 @@ public class Aluno {
 	public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
-	
-	
+
+	public List<Resposta> getRespostas() {
+		return respostas;
+	}
+
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
 }

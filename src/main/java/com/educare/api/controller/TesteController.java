@@ -2,6 +2,7 @@ package com.educare.api.controller;
 
 import java.util.List;
 
+import com.educare.api.dto.ResponderTesteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,12 @@ public class TesteController {
 			return ResponseEntity.badRequest().build();
 		}
 		
+	}
+
+	@PostMapping("/responder")
+	public ResponseEntity<Void> responder(@RequestBody @Valid ResponderTesteDTO dto) {
+		service.responderTeste(dto);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 }

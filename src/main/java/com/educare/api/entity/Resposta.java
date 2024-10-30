@@ -4,11 +4,7 @@ import java.time.LocalDateTime;
 
 import com.educare.api.dto.RespostaDTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +17,22 @@ public class Resposta {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY )
 	private Integer id;
-	
-	//private Aluno aluno;
-	//private Teste teste;
+
+	@ManyToOne
+	@JoinColumn(name = "aluno_id", nullable = false)
+	private Aluno aluno; // Relacionamento com alunos
+
+	@ManyToOne
+	@JoinColumn(name = "teste_id", nullable = false)
+	private Teste teste; // Relacionamento com testes
+
+	private String resposta;
+
 	private LocalDateTime dataResposta;
 	private LocalDateTime dataCriacao;
 	private LocalDateTime dataAtualizacao;
+
+
 
 	public Resposta(RespostaDTO dto) {
 		this.dataResposta = LocalDateTime.now();
@@ -69,5 +75,29 @@ public class Resposta {
 
 	public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
+	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	public Teste getTeste() {
+		return teste;
+	}
+
+	public void setTeste(Teste teste) {
+		this.teste = teste;
+	}
+
+	public String getResposta() {
+		return resposta;
+	}
+
+	public void setResposta(String resposta) {
+		this.resposta = resposta;
 	}
 }

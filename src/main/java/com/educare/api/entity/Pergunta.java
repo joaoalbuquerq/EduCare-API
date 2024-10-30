@@ -4,11 +4,7 @@ import java.time.LocalDateTime;
 
 import com.educare.api.dto.PerguntaDTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +18,11 @@ public class Pergunta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String pergunta;
-	//private Turma turma;
+
+	@ManyToOne
+	@JoinColumn(name = "teste_id", nullable = false)
+	private Teste teste; // Relacionamento com testes
+
 	private LocalDateTime dataCriacao;
 	private LocalDateTime ultimaAlteracao;
 	
@@ -70,7 +70,12 @@ public class Pergunta {
 	public void setUltimaAlteracao(LocalDateTime ultimaAlteracao) {
 		this.ultimaAlteracao = ultimaAlteracao;
 	}
-	
-	
 
+	public Teste getTeste() {
+		return teste;
+	}
+
+	public void setTeste(Teste teste) {
+		this.teste = teste;
+	}
 }

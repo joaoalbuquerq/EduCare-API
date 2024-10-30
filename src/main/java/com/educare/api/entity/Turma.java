@@ -1,14 +1,11 @@
 package com.educare.api.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.educare.api.dto.TurmaDTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +20,10 @@ public class Turma {
 	private Integer id;
 	private String nome;
 	private String escola;
+
+	@OneToMany(mappedBy = "turma")
+	private List<AlunoTurma> alunos; // Relacionamento com alunos
+
 	private LocalDateTime dataCriacao;
 	private LocalDateTime dataAtualizacao;
 	

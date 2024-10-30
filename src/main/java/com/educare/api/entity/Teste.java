@@ -1,14 +1,12 @@
 package com.educare.api.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.educare.api.dto.TesteDTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +21,11 @@ public class Teste {
 	private Integer id;
 	private String nome;
 	private String descricao;
+
+	@OneToMany(mappedBy = "teste", cascade = CascadeType.ALL) // Você pode ajustar o cascade conforme necessário
+	private List<Pergunta> perguntas = new ArrayList<>(); // Inicializar a lista de perguntas
+
+
 	private LocalDateTime dataCriacao;
 	private LocalDateTime ultimaAlteracao;
 	
@@ -31,6 +34,11 @@ public class Teste {
 		this.descricao = dto.descricao() != null ? dto.descricao() : "";
 		this.dataCriacao = LocalDateTime.now();
 		this.ultimaAlteracao = LocalDateTime.now();
+	}
+
+	public void adicionarPergunta(Pergunta pergunta) {
+		perguntas.add(pergunta);
+		pergunta.setTeste(this); // Define o teste na pergunta (se houver relacionamento bidirecional)
 	}
 
 	public Integer getId() {
@@ -77,7 +85,12 @@ public class Teste {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
+	public List<Pergunta> getPerguntas() {
+		return perguntas;
+	}
+
+	public void setPerguntas(List<Pergunta> perguntas) {
+		this.perguntas = perguntas;
+	}
 }
