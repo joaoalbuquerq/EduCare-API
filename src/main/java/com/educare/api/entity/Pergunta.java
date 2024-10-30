@@ -19,9 +19,9 @@ public class Pergunta {
 	private Integer id;
 	private String pergunta;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "teste_id", nullable = false)
-	private Teste teste; // Relacionamento com testes
+	private Teste teste;
 
 	private LocalDateTime dataCriacao;
 	private LocalDateTime ultimaAlteracao;

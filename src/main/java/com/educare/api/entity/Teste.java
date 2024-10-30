@@ -22,10 +22,6 @@ public class Teste {
 	private String nome;
 	private String descricao;
 
-	@OneToMany(mappedBy = "teste", cascade = CascadeType.ALL) // Você pode ajustar o cascade conforme necessário
-	private List<Pergunta> perguntas = new ArrayList<>(); // Inicializar a lista de perguntas
-
-
 	private LocalDateTime dataCriacao;
 	private LocalDateTime ultimaAlteracao;
 	
@@ -36,9 +32,12 @@ public class Teste {
 		this.ultimaAlteracao = LocalDateTime.now();
 	}
 
+	@OneToMany(mappedBy = "teste", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Pergunta> perguntas = new ArrayList<>();
+
 	public void adicionarPergunta(Pergunta pergunta) {
-		perguntas.add(pergunta);
-		pergunta.setTeste(this); // Define o teste na pergunta (se houver relacionamento bidirecional)
+		pergunta.setTeste(this);  // Define o teste na pergunta
+		this.perguntas.add(pergunta);
 	}
 
 	public Integer getId() {

@@ -27,10 +27,17 @@ public class PerguntaService {
 		Teste teste = testeRepository.findById(dto.testeId())
 				.orElseThrow(() -> new EntityNotFoundException("Teste não encontrado"));
 
-		Pergunta pergunta = new Pergunta(dto);
-		pergunta.setTeste(teste); // Associa a pergunta ao teste
+		Pergunta novaPergunta = new Pergunta(dto);
 
-		return repository.save(new Pergunta(dto));
+		// Adiciona a pergunta ao teste, sincronizando ambos os lados
+		teste.adicionarPergunta(novaPergunta);
+
+		repository.save(novaPergunta);
+
+		// Salva e sincroniza toda a entidade Teste com a nova pergunta
+		testeRepository.save(teste);
+
+		return novaPergunta;
 	}
 	
 	public List<Pergunta> listar(){
