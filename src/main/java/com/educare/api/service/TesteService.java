@@ -4,9 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.educare.api.dto.ResponderTesteDTO;
-import com.educare.api.entity.Aluno;
-import com.educare.api.entity.Pergunta;
-import com.educare.api.entity.Resposta;
+import com.educare.api.entity.*;
 import com.educare.api.repository.AlunoRepository;
 import com.educare.api.repository.PerguntaRepository;
 import com.educare.api.repository.RespostaRepository;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.educare.api.dto.TesteDTO;
-import com.educare.api.entity.Teste;
 import com.educare.api.repository.TesteRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -26,13 +23,16 @@ public class TesteService {
 	TesteRepository testeRepository;
 
 	@Autowired
-	AlunoRepository alunoRepository;
+	AlunoService alunoService;
 
 	@Autowired
-	PerguntaRepository perguntaRepository;
+	PerguntaService perguntaService;
 
 	@Autowired
-	RespostaRepository respostaRepository;
+	RespostaService respostaService;
+
+	@Autowired
+	RespostaPerguntaService respostaPerguntaService;
 
 
 	
@@ -53,32 +53,27 @@ public class TesteService {
 		return true;
 	}
 
-	public void responderTeste(ResponderTesteDTO dto) {
-		Aluno aluno = alunoRepository.findById(dto.alunoId())
-				.orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado"));
+	public void responderTeste(Integer testeId, ResponderTesteDTO responderTesteDTO) {
 
-		Teste teste = testeRepository.findById(dto.testeId())
-				.orElseThrow(() -> new EntityNotFoundException("Teste não encontrado"));
+		Aluno aluno = alunoService.pesquisarPorId(responderTesteDTO.alunoId().longValue());
+		Teste teste = testeRepository.findById(testeId).orElseThrow(() -> new RuntimeException("Teste não encontrado"));
 
-		// Obter todas as perguntas relacionadas ao teste
-		List<Pergunta> perguntas = perguntaRepository.findByTesteId(teste.getId());
 
-		for (Pergunta pergunta : perguntas) {
-			// Verifica se existe uma resposta para a pergunta atual
-			String respostaTexto = dto.respostas().get(pergunta.getId());
-			if (respostaTexto != null) {
-				Resposta resposta = new Resposta();
-				resposta.setAluno(aluno); // Atribui o aluno à resposta
-				resposta.setTeste(teste); // Atribui o teste à resposta
-				resposta.setDataResposta(LocalDateTime.now());
-				resposta.setDataCriacao(LocalDateTime.now());
-				resposta.setDataAtualizacao(LocalDateTime.now());
+		Resposta resposta = new Resposta();
+		resposta.setAluno(aluno);
+		resposta.setTeste(teste);
+		resposta.setDataResposta(LocalDateTime.now());
 
-				// Define a resposta do aluno
-				resposta.setResposta(respostaTexto);
+		respostaService.cadastrarAtualizar(resposta);
 
-				respostaRepository.save(resposta); // Persistir a resposta no banco de dados
-			}
+
+		for (ResponderTesteDTO.PerguntaRespostaDTO perguntaRespostaDTO : responderTesteDTO.respostas()) {
+			Pergunta pergunta = perguntaService.pesquisarPorId(perguntaRespostaDTO.perguntaId().longValue());
+
+			RespostaPergunta respostaPergunta = new RespostaPergunta();
+			respostaPergunta.setResposta(resposta);
+			respostaPergunta.setPergunta(pergunta);
+			respostaPerguntaService.cadastrar(respostaPergunta);
 		}
 	}
 }

@@ -20,6 +20,10 @@ public class RespostaService {
 	public Resposta cadastrar(RespostaDTO dto) {
 		return repository.save(new Resposta(dto));
 	}
+
+	public Resposta cadastrarAtualizar(Resposta resposta){
+		return repository.save(resposta);
+	}
 	
 	public List<Resposta> listar(){
 		return repository.findAll();

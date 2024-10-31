@@ -1,10 +1,21 @@
 package com.educare.api.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 import java.util.Map;
 
-public record ResponderTesteDTO (
+public record ResponderTesteDTO(
+        @NotNull
         Integer alunoId,
-        Integer testeId,
-        Map<Integer, String> respostas
-){
+        @NotNull @NotBlank
+        List<PerguntaRespostaDTO> respostas
+) {
+    public record PerguntaRespostaDTO(
+            @NotNull
+            Integer perguntaId,
+            @NotBlank
+            String resposta
+    ) {}
 }

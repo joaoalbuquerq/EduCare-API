@@ -35,29 +35,20 @@ public class AlunoService {
 		return aluno;
 	}
 
+
+
 	public List<Aluno> listar() {
 		return repository.findAll();
 	}
 
-	public Optional<Aluno> pesquisarPorId(Long id) {
-		
-		Optional<Aluno> aluno = repository.findById(id.intValue());
-
-		return aluno;
+	public Aluno pesquisarPorId(Long id) {
+		return repository.findById(id.intValue()).orElseThrow( () -> new EntityNotFoundException());
 		
 	}
 
 	public boolean deletar(Long id) {
-		
-		Optional<Aluno> aluno = pesquisarPorId(id);
-		
-		if(aluno.isPresent()) {
-			repository.delete(aluno.get());
-			return true;
-		}else {
-			return false;
-		}
-		
+		repository.delete(pesquisarPorId(id));
+		return true;
 	}
 	
 

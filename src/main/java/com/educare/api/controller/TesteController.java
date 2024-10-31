@@ -53,10 +53,17 @@ public class TesteController {
 		
 	}
 
-	@PostMapping("/responder")
-	public ResponseEntity<Void> responder(@RequestBody @Valid ResponderTesteDTO dto) {
-		service.responderTeste(dto);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	@PostMapping("/{testeId}/responder")
+	public ResponseEntity<String> responderTeste(
+			@PathVariable Integer testeId,
+			@RequestBody ResponderTesteDTO responderTesteDTO) {
+
+		try {
+			service.responderTeste(testeId, responderTesteDTO);
+			return ResponseEntity.ok("Respostas salvas com sucesso!");
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Erro ao salvar respostas: " + e.getMessage());
+		}
 	}
 
 }
