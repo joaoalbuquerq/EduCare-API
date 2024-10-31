@@ -20,11 +20,11 @@ public class RespostaPergunta {
 
 	@ManyToOne
 	@JoinColumn(name = "resposta_id", nullable = false)
-	private Resposta resposta; // Relacionamento com respostas
+	private Resposta resposta;
 
 	@ManyToOne
 	@JoinColumn(name = "pergunta_id", nullable = false)
-	private Pergunta pergunta; // Relacionamento com perguntas
+	private Pergunta pergunta;
 	
 	private LocalDateTime dataCriacao;
 	private LocalDateTime ultimaAlteracao;

@@ -25,11 +25,11 @@ public class Aluno {
 	private LocalDate dataNascimento;
 
 	@OneToMany(mappedBy = "aluno")
-	private List<Resposta> respostas; // Relacionamento com respostas
+	private List<Resposta> respostas;
 
-	@ManyToOne // Relacionamento muitos-para-um com Turma
-	@JoinColumn(name = "turma_id") // Nome da coluna na tabela alunos
-	private Turma turma; // Referência à turma
+	@ManyToOne
+	@JoinColumn(name = "turma_id")
+	private Turma turma;
 
 	private String escola;
 	private LocalDateTime dataCriacao;

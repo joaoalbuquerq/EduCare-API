@@ -22,7 +22,7 @@ public class Turma {
 	private String escola;
 
 	@OneToMany(mappedBy = "turma")
-	private List<AlunoTurma> alunos; // Relacionamento com alunos
+	private List<AlunoTurma> alunos;
 
 	private LocalDateTime dataCriacao;
 	private LocalDateTime dataAtualizacao;
@@ -82,4 +82,11 @@ public class Turma {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
+	public List<AlunoTurma> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<AlunoTurma> alunos) {
+		this.alunos = alunos;
+	}
 }

@@ -20,11 +20,11 @@ public class Resposta {
 
 	@ManyToOne
 	@JoinColumn(name = "aluno_id", nullable = false)
-	private Aluno aluno; // Relacionamento com alunos
+	private Aluno aluno;
 
 	@ManyToOne
 	@JoinColumn(name = "teste_id", nullable = false)
-	private Teste teste; // Relacionamento com testes
+	private Teste teste;
 
 	private String resposta;
 
