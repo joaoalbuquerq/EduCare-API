@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.educare.api.dto.PerguntaDTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Pergunta {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "teste_id", nullable = false)
+	@JsonIgnore
 	private Teste teste;
 
 	private LocalDateTime dataCriacao;

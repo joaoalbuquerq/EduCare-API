@@ -37,7 +37,7 @@ public class PerguntaService {
 		// Salva e sincroniza toda a entidade Teste com a nova pergunta
 		testeRepository.save(teste);
 
-		return novaPergunta;
+		return pesquisarPorId(novaPergunta.getId().longValue());
 	}
 	
 	public List<Pergunta> listar(){
