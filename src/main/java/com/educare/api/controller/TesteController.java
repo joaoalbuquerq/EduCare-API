@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.educare.api.dto.ResponderTesteDTO;
 import com.educare.api.dto.TesteComPerguntasERespostasDTO;
+import com.educare.api.entity.Resposta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,9 +56,7 @@ public class TesteController {
 	}
 
 	@PostMapping("/{testeId}/responder")
-	public ResponseEntity<String> responderTeste(
-			@PathVariable Integer testeId,
-			@RequestBody ResponderTesteDTO responderTesteDTO) {
+	public ResponseEntity<String> responderTeste(@PathVariable Integer testeId, @RequestBody ResponderTesteDTO responderTesteDTO) {
 			service.responderTeste(testeId, responderTesteDTO);
 			return ResponseEntity.ok("Teste respondido com sucesso!");
 
@@ -65,8 +64,12 @@ public class TesteController {
 
 	@GetMapping("/{testeId}/alunos/{alunoId}/respostas")
 	public ResponseEntity<?> obterRespostaTestePorAluno(@PathVariable Integer testeId, @PathVariable Integer alunoId) {
-		TesteComPerguntasERespostasDTO testeDTO = service.getTesteComPerguntasERespostas(alunoId, testeId);
-		return ResponseEntity.ok(testeDTO);
+		List<Resposta> respostasTeste = service.obterRespostasTesteAluno(alunoId, testeId);
+		return ResponseEntity.ok(respostasTeste);
 	}
 
+	@GetMapping("/obterTeste")
+	public ResponseEntity<?> obterPerguntasTeste(@PathVariable Integer id){
+		return null;
+	}
 }

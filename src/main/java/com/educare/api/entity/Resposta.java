@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.educare.api.dto.RespostaDTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,10 +21,12 @@ public class Resposta {
 
 	@ManyToOne
 	@JoinColumn(name = "aluno_id", nullable = false)
+	@JsonIgnore
 	private Aluno aluno;
 
 	@ManyToOne
 	@JoinColumn(name = "teste_id", nullable = false)
+	@JsonIgnore
 	private Teste teste;
 
 	private String resposta;

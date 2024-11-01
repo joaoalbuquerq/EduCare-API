@@ -74,7 +74,7 @@ public class TesteService {
 		}
 	}
 
-	public TesteComPerguntasERespostasDTO getTesteComPerguntasERespostas(Integer alunoId, Integer testeId) {
+	public List<Resposta> obterRespostasTesteAluno(Integer alunoId, Integer testeId) {
 		Teste teste = pesquisarPorId(testeId.longValue());
 
 		List<Resposta> respostas = respostaService.pesquisarRepostasTesteAluno(alunoId, testeId);
@@ -83,19 +83,6 @@ public class TesteService {
 			throw new EntityNotFoundException("O aluno não respondeu a este teste.");
 		}
 
-		List<RespostaPergunta> respostasPerguntas = respostaPerguntaService.pesquisarListaRespostasPergunta(respostas);
-
-		List<PerguntaComRespostaDTO> perguntasComRespostas = teste.getPerguntas().stream()
-				.map(pergunta -> {
-					String respostaTexto = respostasPerguntas.stream()
-							.filter(respostaPergunta -> respostaPergunta.getPergunta().getId().equals(pergunta.getId()))
-							.map(respostaPergunta -> respostaPergunta.getResposta().getResposta())
-							.findFirst()
-							.orElse(null);
-					return new PerguntaComRespostaDTO(pergunta.getId(), pergunta.getPergunta(), respostaTexto);
-				})
-				.collect(Collectors.toList());
-
-		return new TesteComPerguntasERespostasDTO(teste.getId(), teste.getNome(), teste.getDescricao(), perguntasComRespostas);
+		return respostas;
 	}
 }
