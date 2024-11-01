@@ -57,13 +57,9 @@ public class TesteController {
 	public ResponseEntity<String> responderTeste(
 			@PathVariable Integer testeId,
 			@RequestBody ResponderTesteDTO responderTesteDTO) {
-
-		try {
 			service.responderTeste(testeId, responderTesteDTO);
-			return ResponseEntity.ok("Respostas salvas com sucesso!");
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Erro ao salvar respostas: " + e.getMessage());
-		}
+			return ResponseEntity.ok("Teste respondido com sucesso!");
+
 	}
 
 }
