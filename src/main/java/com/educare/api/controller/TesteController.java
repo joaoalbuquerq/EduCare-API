@@ -3,6 +3,7 @@ package com.educare.api.controller;
 import java.util.List;
 
 import com.educare.api.dto.ResponderTesteDTO;
+import com.educare.api.dto.TesteComPerguntasERespostasDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +61,12 @@ public class TesteController {
 			service.responderTeste(testeId, responderTesteDTO);
 			return ResponseEntity.ok("Teste respondido com sucesso!");
 
+	}
+
+	@GetMapping("/{testeId}/alunos/{alunoId}/respostas")
+	public ResponseEntity<?> obterRespostaTestePorAluno(@PathVariable Integer testeId, @PathVariable Integer alunoId) {
+		TesteComPerguntasERespostasDTO testeDTO = service.getTesteComPerguntasERespostas(alunoId, testeId);
+		return ResponseEntity.ok(testeDTO);
 	}
 
 }

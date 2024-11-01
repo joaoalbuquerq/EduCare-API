@@ -38,4 +38,7 @@ public class RespostaService {
 		return true;
 	}
 
+	public List<Resposta> pesquisarRepostasTesteAluno(Integer alunoId, Integer testeId) {
+		return repository.findByAlunoIdAndTesteId(alunoId, testeId);
+	}
 }
