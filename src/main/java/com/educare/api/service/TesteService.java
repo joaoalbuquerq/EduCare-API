@@ -1,9 +1,6 @@
 package com.educare.api.service;
 
-import com.educare.api.dto.PerguntaComRespostaDTO;
-import com.educare.api.dto.ResponderTesteDTO;
-import com.educare.api.dto.TesteComPerguntasERespostasDTO;
-import com.educare.api.dto.TesteDTO;
+import com.educare.api.dto.*;
 import com.educare.api.entity.*;
 import com.educare.api.repository.TesteRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -84,5 +81,13 @@ public class TesteService {
 		}
 
 		return respostas;
+	}
+
+	public List<PerguntaDTO> getPerguntasPorTesteId(Integer testeId) {
+		Teste teste = pesquisarPorId(testeId.longValue());
+
+		return teste.getPerguntas().stream()
+				.map(pergunta -> new PerguntaDTO(pergunta.getId(), pergunta.getPergunta()))
+				.collect(Collectors.toList());
 	}
 }

@@ -53,4 +53,7 @@ public class PerguntaService {
 		return true;
 	}
 
+	public List<Pergunta> pesquisarPerguntaPorTesteId(Integer testeId) {
+		return repository.findByTesteId(testeId);
+	}
 }

@@ -2,6 +2,7 @@ package com.educare.api.controller;
 
 import java.util.List;
 
+import com.educare.api.dto.PerguntaDTO;
 import com.educare.api.dto.ResponderTesteDTO;
 import com.educare.api.dto.TesteComPerguntasERespostasDTO;
 import com.educare.api.entity.Resposta;
@@ -68,8 +69,9 @@ public class TesteController {
 		return ResponseEntity.ok(respostasTeste);
 	}
 
-	@GetMapping("/obterTeste")
-	public ResponseEntity<?> obterPerguntasTeste(@PathVariable Integer id){
-		return null;
+	@GetMapping("/{testeId}/perguntas")
+	public ResponseEntity<List<PerguntaDTO>> getPerguntasPorTesteId(@PathVariable Integer testeId) {
+		List<PerguntaDTO> perguntas = service.getPerguntasPorTesteId(testeId);
+		return ResponseEntity.ok(perguntas);
 	}
 }
