@@ -24,6 +24,9 @@ public class Turma {
 	@OneToMany(mappedBy = "turma")
 	private List<AlunoTurma> alunos;
 
+	@OneToOne(mappedBy = "turma")
+	private Professor professor;
+
 	private LocalDateTime dataCriacao;
 	private LocalDateTime dataAtualizacao;
 	

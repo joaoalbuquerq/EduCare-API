@@ -21,6 +21,7 @@ public class Aluno {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private String senha;
 	private String email;
 	private LocalDate dataNascimento;
 
@@ -37,6 +38,7 @@ public class Aluno {
 	
 	public Aluno(AlunoDTO dto) {
 		this.nome = dto.nome();
+		this.senha = dto.senha();
 		this.email = dto.email();
 		this.dataNascimento = dto.dataNascimento();
 		this.escola = dto.escola();
