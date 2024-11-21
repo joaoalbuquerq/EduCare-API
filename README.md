@@ -72,3 +72,19 @@ A documentação fornece detalhes sobre todos os endpoints disponíveis, incluin
 4. Faça o push da branch (git push origin feature/nova-funcionalidade)
 5. Abra um Pull Request
 
+## <span style="color:red;">Limitações</span>
+<p>
+    O build do container docker pelo docker-compose.yml está em conflito com a aplicação, ou seja, a API não se conecta ao Banco em container.
+    <span style="color:yellow;">Uma alternativa é buildar seu próprio container postgres com os comandos que seguem:</span>
+</p>
+
+```bash
+# baixar a imagem do postgres
+docker pull postgres:15
+
+# rode o banco em background
+docker run --name banco-educare -dt -e POSTGRES_PASSWORD=senha -p 65530:5432 postgres:15
+
+# acesse o terminal interativo
+docker exec -it banco-educare /bin/bash
+```
